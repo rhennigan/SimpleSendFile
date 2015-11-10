@@ -48,7 +48,11 @@ int main(int argc, char *argv[]) {
 
     // open image file for reading and get file size in bytes
     FILE *input = fopen(file_name, "r");
-    if (input == NULL) error("ERROR loading file");
+    if (input == NULL) {
+        char err_msg[256];
+        sprintf(err_msg, "ERROR loading %s", file_name);
+        error(err_msg);
+    }
     fseek(input, 0L, SEEK_END);
     long file_size = ftell(input);
     fseek(input, 0L, SEEK_SET);
@@ -131,7 +135,7 @@ int main(int argc, char *argv[]) {
 
     // get confirmation from server that transfer was successful
     socket_read(socket_fd, msg_buffer, MSG_SIZE - 1);
-    printf("transfer results: %s\n", msg_buffer);
+    printf("%s\n", msg_buffer);
     memset(msg_buffer, 0, MSG_SIZE);
     // TODO: validate transfer confirmation
     // (this should be "REC DAT <file_size>; RDY Null;")
