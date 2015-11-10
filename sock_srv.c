@@ -6,6 +6,9 @@
 
 //////////////////////////////////////////////////////////////////////////////
 int main(int argc, char *argv[]) {
+    // prevent zombie processes from clogging up the pid list
+    signal(SIGCHLD, SIG_IGN);
+
     // check argument count
     if (argc < 2) {
         fprintf(stderr, "ERROR, no port provided\n");
