@@ -11,6 +11,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
+#include <signal.h>
 
 #define BUFFER_SIZE (1024)
 #define MSG_SIZE    (256)
